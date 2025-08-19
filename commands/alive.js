@@ -1,33 +1,51 @@
-const settings = require("../settings");
-async function aliveCommand(sock, chatId, message) {
-    try {
-        const message1 = `*🤖 Knight Bot is Active!*\n\n` +
-                       `*Version:* ${settings.version}\n` +
-                       `*Status:* Online\n` +
-                       `*Mode:* Public\n\n` +
-                       `*🌟 Features:*\n` +
-                       `• Group Management\n` +
-                       `• Antilink Protection\n` +
-                       `• Fun Commands\n` +
-                       `• And more!\n\n` +
-                       `Type *.menu* for full command list`;
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+  // Sound
+  let name = m.pushName || conn.getName(m.sender)
+  var vn = 'https://cdn.jsdelivr.net/gh/Guru322/GURU-BOT@main/Assets/mp3/Alive.mp3'
+  let url = 'https://github.com/Guru322/GURU-BOT'
+  let murl = 'https://youtu.be/DibiLc17dh0?si=xp9bQ-_frEyDB1-i'
+  let img = 'https://cdn.wallpapersafari.com/71/19/7ZfcpT.png'
+  let con = {
+    key: {
+      fromMe: false,
+      participant: `${m.sender.split`@`[0]}@s.whatsapp.net`,
+      ...(m.chat ? { remoteJid: '16504228206@s.whatsapp.net' } : {}),
+    },
+    message: {
+      contactMessage: {
+        displayName: `${name}`,
+        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`,
+      },
+    },
+  }
+  let doc = {
+    audio: {
+      url: vn,
+    },
+    mimetype: 'audio/mpeg',
+    ptt: true,
+    waveform: [100, 0, 100, 0, 100, 0, 100],
+    fileName: 'Guru',
 
-        await sock.sendMessage(chatId, {
-            text: message1,
-            contextInfo: {
-                forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363161513685998@newsletter',
-                    newsletterName: 'KnightBot MD',
-                    serverMessageId: -1
-                }
-            }
-        }, { quoted: message });
-    } catch (error) {
-        console.error('Error in alive command:', error);
-        await sock.sendMessage(chatId, { text: 'Bot is alive and running!' }, { quoted: message });
-    }
+    contextInfo: {
+      mentionedJid: [m.sender],
+      externalAdReply: {
+        title: 'I AM ALIVE',
+        body: 'GURU BOT',
+        thumbnailUrl: img,
+        sourceUrl: 'https://chat.whatsapp.com/F3sB3pR3tClBvVmlIkqDJp',
+        mediaType: 1,
+        renderLargerThumbnail: true,
+      },
+    },
+  }
+
+  await conn.sendMessage(m.chat, doc, { quoted: con })
 }
 
-module.exports = aliveCommand;
+handler.help = ['alive']
+handler.tags = ['main']
+handler.command = /^(alive)$/i
+handler.desc = 'Check if the bot is alive'
+
+export default handler
