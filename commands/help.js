@@ -5,14 +5,14 @@ const path = require('path');
 async function helpCommand(sock, chatId, message) {
     const helpMessage = `
 ╔═══════════════════╗
-   *🤖 ${settings.botName || 'KnightBot-MD'}*  
+   *🤖 ${settings.botName || 'Rana-Awais MD'}*  
    Version: *${settings.version || '2.0.5'}*
-   by ${settings.botOwner || 'Mr Unique Hacker'}
+   by ${settings.botOwner || 'Rana-Awais MD'}
    YT : ${global.ytch}
 ╚═══════════════════╝
 
-*Available Commands:*
-
+*Available Commands:ī.am*
+ī.am 
 ╔═══════════════════╗
 🌐 *General Commands*:
 ║ ➤ .help or .menu
@@ -228,8 +228,8 @@ Join our channel for updates:`;
                     forwardingScore: 1,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363161513685998@newsletter',
-                        newsletterName: 'KnightBot MD',
+                        newsletterJid: '120363419893616380@newsletter',
+                        newsletterName: 'Rana-Awais MD',
                         serverMessageId: -1
                     }
                 }
@@ -242,8 +242,8 @@ Join our channel for updates:`;
                     forwardingScore: 1,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363161513685998@newsletter',
-                        newsletterName: 'KnightBot MD by Mr Unique Hacker',
+                        newsletterJid: '120363419893616380@newsletter',
+                        newsletterName: 'Rana-Awais MD by Mr Unique Hacker',
                         serverMessageId: -1
                     } 
                 }
